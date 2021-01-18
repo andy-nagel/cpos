@@ -1,7 +1,7 @@
 FROM php:7.4-fpm
 
 # Copy composer.lock and composer.json
-COPY webroot/composer.lock composer.json /var/www/
+COPY webroot/composer.lock webroot/composer.json /var/www/
 
 # Set working directory
 WORKDIR /var/www
@@ -36,27 +36,7 @@ RUN apt update -y
 
 RUN apt-get install msmtp msmtp-mta -y
 
-# root is the person who gets all mail for userids < 1000
-#RUN echo "root=yourAdmin@email.com" >> /etc/ssmtp/ssmtp.conf
-
-# Here is the gmail configuration (or change it to your private smtp server)
-RUN echo "# /etc/msmtprc" >> /etc/msmtprc
-RUN echo "" >> /etc/msmtprc
-RUN echo "defaults" >> /etc/msmtprc
-RUN echo "auth    on" >> /etc/msmtprc
-RUN echo "tls            on" >> /etc/msmtprc
-RUN echo "tls_trust_file /etc/ssl/certs/ca-certificates.crt" >> /etc/msmtprc
-RUN echo "logfile        ~/.msmtp.log" >> /etc/msmtprc
-RUN echo "account        gmail" >> /etc/msmtprc
-RUN echo "host           smtp.gmail.com" >> /etc/msmtprc
-RUN echo "port           587" >> /etc/msmtprc
-RUN echo "from           andynagel2000@gmail.com" >> /etc/msmtprc
-RUN echo "user           andynagel2000" >> /etc/msmtprc
-RUN echo "password Dyw2k@s3" >> /etc/msmtprc
-RUN echo "account default : gmail" >> /etc/msmtprc
-RUN echo "UseTLS=YES" >> /etc/msmtprc
-RUN echo "UseSTARTTLS=YES" >> /etc/msmtprc
-
+COPY ./php/msmtprc /etc/msmtprc
 
 # Set up php sendmail config
 #RUN echo "sendmail_path=sendmail -i -t" >> /usr/local/etc/php/conf.d/php-sendmail.ini

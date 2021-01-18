@@ -8,7 +8,6 @@ use app\models\Interest;
 use app\models\Membership;
 use app\models\MembershipType;
 use app\models\Person;
-use Exception;
 
 spl_autoload_register(function($className) {
         $className = str_replace("\\", DIRECTORY_SEPARATOR, $className);
@@ -102,26 +101,25 @@ spl_autoload_register(function($className) {
                         return actions.order.create({
                             payer: {
                                 name: {
-                                    given_name: "PayPal",
-                                    surname: "Customer"
+                                    given_name: "<?php echo $membership->getPrimary()->getFirstName(); ?>",
+                                    surname: "<?php echo $membership->getPrimary()->getLastName(); ?>"
                                 },
                                 address: {
-                                    address_line_1: '123 ABC Street',
-                                    address_line_2: 'Apt 2',
-                                    admin_area_2: 'San Jose',
-                                    admin_area_1: 'CA',
-                                    postal_code: '95121',
+                                    address_line_1: "<?php echo $address->getStreet1(); ?>",
+                                    address_line_2: "<?php echo $address->getStreet2(); ?>",
+                                    admin_area_2: "<?php echo $address->getCity(); ?>",
+                                    admin_area_1: "<?php echo $address->getState(); ?>",
+                                    postal_code: "<?php echo $address->getZipcode(); ?>",
                                     country_code: 'US'
                                 },
-                                email_address: "customer@domain.com",
+                                email_address: "<?php echo $membership->getPrimary()->getEmail(); ?>",
                                 phone: {
-                                    phone_type: "MOBILE",
                                     phone_number: {
-                                        national_number: "14082508100"
+                                        national_number: "<?php echo $membership->getPrimary()->getPhone(); ?>"
                                     }
                                 }
                             },
-                            purchase_units: [{"description":"Test Membership","amount":{"currency_code":"USD","value":2}}]
+                            purchase_units: [{"description":"Community Players of Salisbury <?php echo $membership->getType()->getType(); ?> Membership","amount":{"currency_code":"USD","value":<?php echo $membership->getType()->getCost(); ?>}}]
                         });
                     },
 

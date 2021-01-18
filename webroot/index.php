@@ -3,6 +3,7 @@
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     </head>
 <body>
 <form action="app/http/membership/apply.php" method="post" enctype="application/x-www-form-urlencoded">
@@ -61,15 +62,15 @@
             <div class="row">
                 <div class="col-sm-6">
                     <label for="firstName2" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName2" name="firstName2" value="<?php echo $_SESSION['membership_data']['firstName2']; ?>">
+                    <input type="text" class="form-control family" id="firstName2" name="firstName2" value="<?php echo $_SESSION['membership_data']['firstName2']; ?>">
                     <label for="lastName2" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName2" name="lastName2" value="<?php echo $_SESSION['membership_data']['lastName2']; ?>">
+                    <input type="text" class="form-control family" id="lastName2" name="lastName2" value="<?php echo $_SESSION['membership_data']['lastName2']; ?>">
                 </div>
                 <div class="col-sm-6">
                     <label for="phone2" class="form-label">Phone</label>
-                    <input type="phone" class="form-control" id="phone2" name="phone2" value="<?php echo $_SESSION['membership_data']['phone2']; ?>">
+                    <input type="phone" class="form-control family" id="phone2" name="phone2" value="<?php echo $_SESSION['membership_data']['phone2']; ?>">
                     <label for="email2" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email2" name="email2" aria-describedby="emailHelp" value="<?php echo $_SESSION['membership_data']['email2']; ?>">
+                    <input type="email" class="form-control family" id="email2" name="email2" aria-describedby="emailHelp" value="<?php echo $_SESSION['membership_data']['email2']; ?>">
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
             </div>
@@ -78,57 +79,57 @@
                 <div class="row">
                     <div class="col-sm">
                         <label for="firstName3" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName3" name="firstName3" value="<?php echo $_SESSION['membership_data']['firstName3']; ?>">
+                        <input type="text" class="form-control family" id="firstName3" name="firstName3" value="<?php echo $_SESSION['membership_data']['firstName3']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="lastName3" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName3" name="lastName3" value="<?php echo $_SESSION['membership_data']['lastName3']; ?>">
+                        <input type="text" class="form-control family" id="lastName3" name="lastName3" value="<?php echo $_SESSION['membership_data']['lastName3']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="age3" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="age3" name="age3" value="<?php echo $_SESSION['membership_data']['age3']; ?>">
+                        <input type="text" class="form-control family" id="age3" name="age3" value="<?php echo $_SESSION['membership_data']['age3']; ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">
                         <label for="firstName4" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName4" name="firstName4" value="<?php echo $_SESSION['membership_data']['firstName4']; ?>">
+                        <input type="text" class="form-control family" id="firstName4" name="firstName4" value="<?php echo $_SESSION['membership_data']['firstName4']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="lastName4" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName4" name="lastName4" value="<?php echo $_SESSION['membership_data']['lastName4']; ?>">
+                        <input type="text" class="form-control family" id="lastName4" name="lastName4" value="<?php echo $_SESSION['membership_data']['lastName4']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="age4" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="age4" name="age4" value="<?php echo $_SESSION['membership_data']['age4']; ?>">
+                        <input type="text" class="form-control family" id="age4" name="age4" value="<?php echo $_SESSION['membership_data']['age4']; ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">
                         <label for="firstName5" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName5" name="firstName5" value="<?php echo $_SESSION['membership_data']['firstName5']; ?>">
+                        <input type="text" class="form-control family" id="firstName5" name="firstName5" value="<?php echo $_SESSION['membership_data']['firstName5']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="lastName5" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName5" name="lastName5" value="<?php echo $_SESSION['membership_data']['lastName5']; ?>">
+                        <input type="text" class="form-control family" id="lastName5" name="lastName5" value="<?php echo $_SESSION['membership_data']['lastName5']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="age5" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="age5" name="age5" value="<?php echo $_SESSION['membership_data']['age5']; ?>">
+                        <input type="text" class="form-control family" id="age5" name="age5" value="<?php echo $_SESSION['membership_data']['age5']; ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm">
                         <label for="firstName6" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName6" name="firstName6" value="<?php echo $_SESSION['membership_data']['firstName6']; ?>">
+                        <input type="text" class="form-control family" id="firstName6" name="firstName6" value="<?php echo $_SESSION['membership_data']['firstName6']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="lastName6" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName6" name="lastName6" value="<?php echo $_SESSION['membership_data']['lastName6']; ?>">
+                        <input type="text" class="form-control family" id="lastName6" name="lastName6" value="<?php echo $_SESSION['membership_data']['lastName6']; ?>">
                     </div>
                     <div class="col-sm">
                         <label for="age6" class="form-label">Age</label>
-                        <input type="text" class="form-control" id="age6" name="age6" value="<?php echo $_SESSION['membership_data']['age6']; ?>">
+                        <input type="text" class="form-control family" id="age6" name="age6" value="<?php echo $_SESSION['membership_data']['age6']; ?>">
                     </div>
                 </div>
                 <h3>Interests</h3>
@@ -198,5 +199,14 @@
         </div>
     </div>
 </form>
+<script type="text/javascript">
+    $("#membershipType").click(function() {
+        if ($("#membershipType").val() == 1) {
+            $(".family").attr('disabled', false);
+        } else {
+            $(".family").attr('disabled', true);
+        }
+    });
+</script>
 </body>
 </html>

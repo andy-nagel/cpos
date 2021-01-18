@@ -108,7 +108,7 @@ class Membership
     /**
      * @return Person
      */
-    public function getSecondary(): Person
+    public function getSecondary()
     {
         return $this->secondary;
     }
@@ -130,11 +130,11 @@ class Membership
     }
 
     /**
-     * @param Person[] $children
+     * @param Person $child
      */
-    public function addChild(array $children)
+    public function addChild($child)
     {
-        $this->children[] = $children;
+        $this->children[] = $child;
     }
 
     /**
@@ -155,6 +155,17 @@ class Membership
         $stmtResult = $stmt->execute();
         if (!$stmtResult) {
             exit("Error connecting {$memberType} user to membership in DB");
+        }
+        switch ($memberType) {
+            case 'primary':
+                $this->setPrimary($person);
+                break;
+            case 'secondary':
+                $this->setSecondary($person);
+                break;
+            case 'child':
+                $this->addChild($person);
+                break;
         }
     }
 
@@ -197,24 +208,30 @@ class Membership
     public function toEmailString()
     {
         $address = $this->getPrimary()->getAddress();
-        $str = $this->getType()->getType() . ' Membership ' . $this->getStart()->format('M-d-Y') . "\n\nPrimary Member:\n"
-
-            . $address->getStreet1() . "\n" . $address->getStreet1() . "\n"
+        $str = $this->getType()->getType() . ' Membership ' . $this->getStart()->format('M-d-Y')
+            . "\n\nPrimary Member:\n" . $this->getPrimary()->getFirstName() . ' ' . $this->getPrimary()->getLastName()
+            . "\n" . $this->getPrimary()->getPhone() . "\n" . $this->getPrimary()->getEmail()
+            . "\n" . $address->getStreet1() . "\n" . $address->getStreet2() . "\n"
             . $address->getCity() . ', ' . $address->getState() . ' ' . $address->getZipcode() . "\n\n";
 
         if ($this->getType()->getId() == 1) {
-            $str .= "Secondary Member:\n" . $this->getSecondary()->getFirstName() . ' ' . $this->getSecondary()->getLastName() . "\n"
-                . $this->getSecondary()->getPhone() . "\n" . $this->getSecondary()->getEmail() . "\n\n"
-                . "Children:\n";
-            foreach ($this->children as $child) {
-                $str .= $child->getFirstName() . ' ' . $child->getLastName() . ', age ' . $child->getAge() . "\n";
+            if ($this->getSecondary()) {
+                $str .= "Secondary Member:\n" . $this->getSecondary()->getFirstName() . ' ' . $this->getSecondary()->getLastName() . "\n"
+                    . $this->getSecondary()->getPhone() . "\n" . $this->getSecondary()->getEmail() . "\n\n";
             }
-            $str .= "\n";
+            if (count($this->children)) {
+                $str .= "Children:\n";
+                foreach ($this->children as $child) {
+                    $str .= $child->getFirstName() . ' ' . $child->getLastName() . ', age ' . $child->getAge() . "\n";
+                }
+                $str .= "\n";
+            }
         }
         $str .= "Interests:\n";
         foreach ($this->getInterests() as $interest) {
             $str .= $interest->getName() . "\n";
         }
+        return $str;
     }
 
     /**
